@@ -5,12 +5,12 @@ import ProjectsSection from '@/components/ProjectsSection';
 import TechStackSection from '@/components/TechStackSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
-import CustomCursor from '@/components/CustomCursor';
+import CustomCursorWrapper from '@/components/CustomCursorWrapper';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <CustomCursor />
+      <CustomCursorWrapper />
       <Navigation />
       <div id="home">
         <HeroSection />
