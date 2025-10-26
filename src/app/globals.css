@@ -38,7 +38,20 @@
 /* Global font styling for cyber aesthetic */
 body {
   font-family: 'Inter', monospace;
-  cursor: none;
+}
+
+/* Hide default cursor on desktop devices that can hover */
+@media (hover: hover) {
+  body {
+    cursor: none;
+  }
+}
+
+/* Show default cursor on touch-only mobile devices */
+@media (hover: none) {
+  body {
+    cursor: auto;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -101,6 +114,10 @@ p, span, div, a, button, input, textarea, label {
 .interactive:hover {
   transform: translateY(-2px);
   filter: brightness(1.1);
+}
+
+:root.light .interactive:hover {
+  filter: brightness(0.95);
 }
 
 /* Button Hover Effects */
@@ -179,6 +196,10 @@ p, span, div, a, button, input, textarea, label {
   filter: drop-shadow(0 0 10px currentColor);
 }
 
+:root.light .icon-hover:hover {
+  filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4));
+}
+
 /* Link Hover Effects */
 .link-hover {
   position: relative;
@@ -206,6 +227,9 @@ p, span, div, a, button, input, textarea, label {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
@@ -213,6 +237,140 @@ body {
   color: var(--foreground);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode styles */
+:root.light body {
+  background: #FFFFFF;
+  color: #1a1a2e;
+}
+
+:root.light {
+  --background: #FFFFFF;
+  --foreground: #1a1a2e;
+  --primary: #3b82f6;
+  --secondary: #8b5cf6;
+  --accent: #06b6d4;
+  --glass-bg: rgba(0, 0, 0, 0.05);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode text colors */
+:root.light .text-gray-300 {
+  color: #4b5563;
+}
+
+:root.light .text-gray-400 {
+  color: #6b7280;
+}
+
+:root.light .text-white {
+  color: #1a1a2e;
+}
+
+:root.light h1,
+:root.light h2,
+:root.light h3,
+:root.light h4,
+:root.light h5,
+:root.light h6 {
+  color: #1a1a2e;
+}
+
+/* Disable animations in light mode */
+:root.light .animated-bg {
+  background: #FFFFFF;
+  animation: none;
+}
+
+/* Light mode - Override dark backgrounds with light ones */
+html.light [class*="bg-gray-900"],
+html.light [class*="bg-gray-800"],
+html.light [class*="bg-gray-700"] {
+  background-color: #f9fafb !important;
+}
+
+html.light [class*="text-gray-300"],
+html.light [class*="text-gray-400"],
+html.light [class*="text-white"] {
+  color: #1a1a2e !important;
+}
+
+html.light section {
+  background-color: #FFFFFF !important;
+}
+
+/* Light mode borders */
+html.light [class*="border-gray-700"],
+html.light [class*="border-gray-600"] {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Form inputs in light mode */
+html.light input,
+html.light textarea,
+html.light select {
+  background-color: #f9fafb !important;
+  color: #1a1a2e !important;
+}
+
+html.light input:focus,
+html.light textarea:focus,
+html.light select:focus {
+  background-color: #ffffff !important;
+  border-color: #3b82f6 !important;
+  color: #1a1a2e !important;
+}
+
+/* Gradient text maintains color in light mode */
+html.light .gradient-text {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Icons that should stay bright in light mode */
+html.light .bg-gradient-to-r svg {
+  color: white !important;
+}
+
+/* Section padding adjustments for light mode */
+html.light .py-20,
+html.light .py-16,
+html.light .py-12 {
+  background-color: transparent;
+}
+
+/* Technology badges and chips in light mode */
+html.light [class*="text-blue-300"],
+html.light [class*="text-purple-300"],
+html.light [class*="text-green-300"] {
+  color: #1e40af !important;
+}
+
+html.light [class*="bg-blue-500/20"],
+html.light [class*="bg-purple-500/20"],
+html.light [class*="bg-green-500/20"],
+html.light [class*="bg-orange-500/20"],
+html.light [class*="bg-indigo-500/20"] {
+  background-color: #dbeafe !important;
+  border-color: #93c5fd !important;
+}
+
+html.light [class*="border-blue-500/30"],
+html.light [class*="border-purple-500/30"] {
+  border-color: #3b82f6 !important;
+}
+
+/* Stats numbers in light mode */
+html.light .text-3xl,
+html.light .text-4xl,
+html.light .text-5xl {
+  color: #1a1a2e !important;
 }
 
 /* Custom scrollbar */
@@ -233,6 +391,18 @@ body {
   background: linear-gradient(45deg, #2563eb, #7c3aed);
 }
 
+:root.light ::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+:root.light ::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #93c5fd, #a78bfa);
+}
+
+:root.light ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #60a5fa, #8b5cf6);
+}
+
 /* Glassmorphism utility classes */
 .glass {
   background: var(--glass-bg);
@@ -246,6 +416,16 @@ body {
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+:root.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+:root.light .glass-strong {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Neon glow effects */

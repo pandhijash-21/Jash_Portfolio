@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,8 +50,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
-        <PageLoader />
-        {children}
+        <ThemeProvider>
+          <PageLoader />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

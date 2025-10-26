@@ -14,7 +14,7 @@ export default function HeroSection() {
   };
 
   // Rotating greetings
-  const greetings = ['hi', 'namaste', 'bonjour'];
+  const greetings = ['Hi', 'Namaste', 'Bonjour'];
   const [currentGreeting, setCurrentGreeting] = useState(greetings[0]);
 
   useEffect(() => {
@@ -30,14 +30,14 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden overflow-x-hidden">
       <ParticlesBackground />
       
       {/* Animated background gradient */}
       <div className="absolute inset-0 animated-bg opacity-50" />
       
-      {/* Main content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
+       {/* Main content */}
+       <div className="relative z-10 text-center px-4 sm:px-6 max-w-full w-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

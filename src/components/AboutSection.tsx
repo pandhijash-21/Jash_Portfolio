@@ -42,20 +42,13 @@ export default function AboutSection() {
             <h3 className="text-2xl font-bold text-white mb-6">My Story</h3>
             <div className="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                I'm a passionate full-stack developer with over 2 years of experience 
-                building scalable web applications and mobile solutions. My journey 
-                began with curiosity about how things work, which led me to discover 
-                the magic of coding.
+                Full-stack developer with 2+ years of experience building scalable, user-centric web and mobile applications. My work blends modern JavaScript frameworks like React and Node.js with cloud-ready architectures to deliver performance, reliability, and clean execution.
               </p>
               <p>
-                I specialize in modern web technologies including React, Node.js, 
-                and cloud platforms. I love tackling complex problems and turning 
-                innovative ideas into reality through clean, efficient code.
+                I enjoy understanding problems deeply — breaking them down, optimizing edge cases, and building solutions that are both elegant and practical. Whether it's crafting intuitive UI flows or shaping efficient backend systems, I focus on impact and long-term maintainability.
               </p>
               <p>
-                When I'm not coding, you'll find me exploring new technologies, 
-                contributing to open-source projects, or sharing knowledge with 
-                the developer community.
+                Outside of development, I stay curious: exploring emerging technologies, contributing to open-source, and engaging with the developer community to grow and help others grow.
               </p>
             </div>
           </motion.div>

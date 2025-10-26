@@ -3,6 +3,8 @@
 import { useEffect, useState, useRef } from 'react';
 
 export default function CustomCursor() {
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
@@ -10,7 +12,38 @@ export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
 
+  // Check if device is a touch device on mount
   useEffect(() => {
+    const checkTouchDevice = () => {
+      // Use the standard media query for touch-only devices
+      // (hover: none) means the device cannot hover (touch-only)
+      // (pointer: coarse) means the pointer is not precise (finger/coarse touch)
+      const touchOnly = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      return touchOnly;
+    };
+    
+    // Check immediately and set mounted
+    const isTouch = checkTouchDevice();
+    setIsTouchDevice(isTouch);
+    setMounted(true);
+    
+    // Also listen for changes in case of device rotation or responsive design changes
+    const mediaQuery = window.matchMedia('(hover: none) and (pointer: coarse)');
+    const handleChange = (e: MediaQueryListEvent) => setIsTouchDevice(e.matches);
+    
+    mediaQuery.addEventListener('change', handleChange);
+    
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Don't set up cursor logic on touch devices
+    if (isTouchDevice) {
+      return;
+    }
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -93,7 +126,12 @@ export default function CustomCursor() {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [mousePosition]);
+  }, [mousePosition, isTouchDevice]);
+
+  // Don't render cursor on touch devices or before mount (prevent hydration mismatch)
+  if (!mounted || isTouchDevice) {
+    return null;
+  }
 
   return (
     <>

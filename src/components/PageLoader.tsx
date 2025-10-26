@@ -5,6 +5,24 @@ import { useState, useEffect } from 'react';
 
 export default function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isLightMode, setIsLightMode] = useState(false);
+
+  useEffect(() => {
+    // Check initial theme
+    setIsLightMode(document.documentElement.classList.contains('light'));
+    
+    // Listen for theme changes
+    const observer = new MutationObserver(() => {
+      setIsLightMode(document.documentElement.classList.contains('light'));
+    });
+    
+    observer.observe(document.documentElement, { 
+      attributes: true, 
+      attributeFilter: ['class'] 
+    });
+    
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     // Simulate loading time (minimum 2 seconds for smooth experience)
@@ -22,10 +40,16 @@ export default function PageLoader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 bg-black z-[9999] flex items-center justify-center"
+          className={`fixed inset-0 z-[9999] flex items-center justify-center ${
+            isLightMode ? 'bg-white' : 'bg-black'
+          }`}
         >
           {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-blue-900/20" />
+          <div className={`absolute inset-0 ${
+            isLightMode 
+              ? 'bg-gradient-to-br from-blue-100/30 via-purple-100/30 to-blue-100/30' 
+              : 'bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-blue-900/20'
+          }`} />
           
           {/* Main loader content */}
           <div className="relative z-10 text-center">
@@ -76,7 +100,9 @@ export default function PageLoader() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-gray-400 text-sm sm:text-base"
+              className={`text-sm sm:text-base ${
+                isLightMode ? 'text-gray-600' : 'text-gray-400'
+              }`}
             >
               <motion.span
                 animate={{ opacity: [0.5, 1, 0.5] }}
@@ -93,7 +119,9 @@ export default function PageLoader() {
               transition={{ duration: 0.6, delay: 1 }}
               className="mt-6 w-64 mx-auto"
             >
-              <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
+              <div className={`h-1 rounded-full overflow-hidden ${
+                isLightMode ? 'bg-gray-200' : 'bg-gray-800'
+              }`}>
                 <motion.div
                   className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
                   initial={{ width: "0%" }}
@@ -114,7 +142,9 @@ export default function PageLoader() {
                 return (
                   <motion.div
                     key={i}
-                    className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
+                    className={`absolute w-1 h-1 rounded-full ${
+                      isLightMode ? 'bg-blue-500/20' : 'bg-blue-400/30'
+                    }`}
                     style={{
                       left: `${left}%`,
                       top: `${top}%`,

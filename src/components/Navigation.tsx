@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import ThemeToggleSafe from './ThemeToggleSafe';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -56,7 +57,7 @@ export default function Navigation() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.name}
@@ -70,20 +71,24 @@ export default function Navigation() {
                 {item.name}
               </motion.button>
             ))}
+            <ThemeToggleSafe />
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden glass p-2 rounded-lg interactive"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-white" />
-            ) : (
-              <Menu className="w-6 h-6 text-white" />
-            )}
-          </motion.button>
+          {/* Mobile Menu - Theme Toggle and Menu Button */}
+          <div className="md:hidden flex items-center gap-3">
+            <ThemeToggleSafe />
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="glass p-2 rounded-lg interactive"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-white" />
+              ) : (
+                <Menu className="w-6 h-6 text-white" />
+              )}
+            </motion.button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
