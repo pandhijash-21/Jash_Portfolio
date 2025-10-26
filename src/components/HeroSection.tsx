@@ -30,14 +30,14 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden overflow-x-hidden">
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
       <ParticlesBackground />
       
       {/* Animated background gradient */}
       <div className="absolute inset-0 animated-bg opacity-50" />
       
        {/* Main content */}
-       <div className="relative z-10 text-center px-4 sm:px-6 max-w-full w-full mx-auto">
+       <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl w-full mx-auto overflow-hidden pt-20 md:pt-16">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,15 +45,15 @@ export default function HeroSection() {
           className="mb-6 sm:mb-8"
         >
           {/* Name and Photo Container */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8 mb-8 sm:mb-6">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-8 sm:mb-6">
             {/* Profile Photo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="relative order-1 md:order-1"
+              className="relative flex-shrink-0"
             >
-              <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full glass-strong border-4 border-blue-500/30 overflow-hidden shadow-2xl">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full glass-strong border-4 border-blue-500/30 overflow-hidden shadow-2xl">
                 <img 
                   src="/jash-photo.jpg" 
                   alt="Jash Pandhi" 
@@ -64,7 +64,7 @@ export default function HeroSection() {
 
             {/* Greeting and Name */}
             <motion.div 
-              className="text-center md:text-left order-2 md:order-2"
+              className="text-center md:text-left w-full max-w-full flex flex-col"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
@@ -85,7 +85,7 @@ export default function HeroSection() {
               
               {/* Name */}
               <motion.h1 
-                className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-bold relative group cursor-pointer leading-tight"
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-bold relative group cursor-pointer leading-tight overflow-hidden"
                 whileHover={{ scale: 1.02 }}
               >
                 <span className="relative inline-block">
@@ -126,7 +126,7 @@ export default function HeroSection() {
                   
                   {/* Text shadow glow */}
                   <motion.div
-                    className="absolute inset-0 text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-bold opacity-0 group-hover:opacity-30 -z-5"
+                    className="absolute inset-0 text-2xl sm:text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-bold opacity-0 group-hover:opacity-30 -z-5"
                     initial={{ opacity: 0 }}
                     whileHover={{ 
                       opacity: 0.3,

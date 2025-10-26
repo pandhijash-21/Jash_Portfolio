@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import ThemeToggleSafe from './ThemeToggleSafe';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -36,26 +35,17 @@ export default function Navigation() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className={`fixed top-16 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled 
           ? 'glass-strong backdrop-blur-md' 
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold gradient-text cursor-pointer"
-            onClick={() => scrollToSection('#home')}
-          >
-            Jash Pandhi
-          </motion.div>
-
+      <div className="max-w-7xl mx-auto px-3 sm:px-6">
+        <div className="flex items-center justify-center h-12">
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {navItems.map((item, index) => (
@@ -71,12 +61,10 @@ export default function Navigation() {
                 {item.name}
               </motion.button>
             ))}
-            <ThemeToggleSafe />
           </div>
 
-          {/* Mobile Menu - Theme Toggle and Menu Button */}
-          <div className="md:hidden flex items-center gap-3">
-            <ThemeToggleSafe />
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
