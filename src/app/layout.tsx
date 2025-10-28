@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -7,6 +7,13 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -15,6 +22,14 @@ export const metadata: Metadata = {
   keywords: ["Jash Pandhi", "full stack developer", "web development", "react", "node.js", "typescript", "portfolio", "Ahmedabad", "Gujarat"],
   authors: [{ name: "Jash Pandhi" }],
   creator: "Jash Pandhi",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -49,7 +64,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider>
           <PageLoader />
           {children}
