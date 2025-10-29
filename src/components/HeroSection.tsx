@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import ParticlesBackground from './ParticlesBackground';
 
@@ -196,6 +196,18 @@ export default function HeroSection() {
           >
             View Projects
           </motion.button>
+
+          <motion.a
+            href="/resume/jash-pandhi-resume.pdf"
+            download="Jash-Pandhi-Resume.pdf"
+            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(34, 197, 94, 0.5)" }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full sm:w-auto glass px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold text-white border-2 border-green-500 hover:border-green-400 transition-all duration-300 btn-hover interactive flex items-center justify-center gap-2"
+            suppressHydrationWarning
+          >
+            <Download className="w-5 h-5" />
+            Download Resume
+          </motion.a>
         </motion.div>
 
         {/* Social Links */}

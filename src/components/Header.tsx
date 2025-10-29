@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 import ThemeToggleSafe from './ThemeToggleSafe';
 
 const navItems = [
@@ -54,10 +54,23 @@ export default function Header() {
                   whileHover={{ scale: 1.05 }}
                   onClick={() => scrollToSection(item.href)}
                   className="text-gray-300 hover:text-white transition-colors duration-300 font-medium link-hover interactive"
+                  suppressHydrationWarning
                 >
                   {item.name}
                 </motion.button>
               ))}
+              <motion.a
+                href="/resume/jash-pandhi-resume.pdf"
+                download="Jash-Pandhi-Resume.pdf"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-full hover:from-green-600 hover:to-emerald-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50"
+              >
+                <Download className="w-4 h-4" />
+                Resume
+              </motion.a>
               <ThemeToggleSafe />
             </div>
 
@@ -68,6 +81,7 @@ export default function Header() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="glass p-2 rounded-lg interactive"
+                suppressHydrationWarning
               >
                 {isMobileMenuOpen ? (
                   <X className="w-6 h-6 text-white" />
@@ -100,10 +114,25 @@ export default function Header() {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   onClick={() => scrollToSection(item.href)}
                   className="block w-full text-left text-gray-300 hover:text-white transition-colors duration-300 py-2 link-hover interactive"
+                  suppressHydrationWarning
                 >
                   {item.name}
                 </motion.button>
               ))}
+              <motion.a
+                href="/resume/jash-pandhi-resume.pdf"
+                download="Jash-Pandhi-Resume.pdf"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ 
+                  opacity: isMobileMenuOpen ? 1 : 0,
+                  x: isMobileMenuOpen ? 0 : -20
+                }}
+                transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
+                className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-full hover:from-green-600 hover:to-emerald-600 transition-all duration-300 justify-center"
+              >
+                <Download className="w-4 h-4" />
+                Download Resume
+              </motion.a>
             </div>
           </motion.div>
         </div>

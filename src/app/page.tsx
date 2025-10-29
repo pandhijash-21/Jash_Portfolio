@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import TechStackSection from '@/components/TechStackSection';
+import AchievementsSection from '@/components/AchievementsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
@@ -19,6 +20,7 @@ export default function Home() {
       <AboutSection />
       <ProjectsSection />
       <TechStackSection />
+      <AchievementsSection />
       <ContactSection />
       <Footer />
     </main>
