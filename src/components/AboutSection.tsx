@@ -6,9 +6,7 @@ import { Code, Database, Globe, Smartphone, Zap } from 'lucide-react';
 const skills = [
   { name: 'Frontend Development', icon: Globe, level: 95, color: 'from-blue-500 to-cyan-500' },
   { name: 'Backend Development', icon: Database, level: 90, color: 'from-purple-500 to-pink-500' },
-  { name: 'Mobile Development', icon: Smartphone, level: 85, color: 'from-green-500 to-emerald-500' },
-  { name: 'DevOps & Cloud', icon: Zap, level: 80, color: 'from-orange-500 to-red-500' },
-  { name: 'System Architecture', icon: Code, level: 88, color: 'from-indigo-500 to-purple-500' },
+  { name: 'Mobile Development', icon: Smartphone, level: 85, color: 'from-green-500 to-emerald-500' }
 ];
 
 export default function AboutSection() {

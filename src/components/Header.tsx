@@ -96,7 +96,7 @@ export default function Header() {
           {/* Mobile Navigation Menu */}
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ 
+            animate={{
               opacity: isMobileMenuOpen ? 1 : 0,
               height: isMobileMenuOpen ? 'auto' : 0
             }}
@@ -108,7 +108,7 @@ export default function Header() {
                 <motion.button
                   key={item.name}
                   initial={{ opacity: 0, x: -20 }}
-                  animate={{ 
+                  animate={{
                     opacity: isMobileMenuOpen ? 1 : 0,
                     x: isMobileMenuOpen ? 0 : -20
                   }}
@@ -124,7 +124,7 @@ export default function Header() {
                 href="/resume/jash-pandhi-resume.pdf"
                 download="Jash-Pandhi-Resume.pdf"
                 initial={{ opacity: 0, x: -20 }}
-                animate={{ 
+                animate={{
                   opacity: isMobileMenuOpen ? 1 : 0,
                   x: isMobileMenuOpen ? 0 : -20
                 }}

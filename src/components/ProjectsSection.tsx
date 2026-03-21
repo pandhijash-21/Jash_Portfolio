@@ -6,51 +6,65 @@ import { useState } from 'react';
 
 const ongoingProjects = [
   {
-    title: 'Sunshine',
-    description: 'A full-stack e-commerce platform built with modern technologies, featuring both web application and a separately developed mobile app.',
-    detailedDescription: `🚀 Key Features
-• User Authentication - Secure login/register system
-• Product Catalog - Browse products with categories
-• Shopping Cart - Add to cart and checkout functionality
-• Order Management - Complete order processing system
-• Admin Dashboard - Backend management interface
-• Payment Integration - Secure payment processing
-• Mobile App - Native mobile application for iOS and Android
+    title: 'HRMS',
+    description: 'Developing a full-stack College HR Management System with dynamic form builder, role-based access control, encrypted sensitive data handling, and self-service employee portal using Next.js, Node.js, Hasura GraphQL, PostgreSQL, and Prisma.',
+    detailedDescription: `HRMS — College HR Management System
+
+Project Overview
+A full-stack College HR Management System built for Gandhinagar University, designed to digitize and streamline all HR operations for 500+ teaching and non-teaching staff members.
+
+🚀 Key Features
+• Dynamic Form Builder — Admins can add, remove, and reorder custom fields across any module at runtime without any code changes or database migrations
+• Employee Self-Service Portal — Employees can log in, view their profile, update personal information (pending HR approval), upload documents, and track their own audit history
+• Role-Based Access Control — Three-tier permission system (Employee / HR / Admin) with row-level and column-level enforcement at the GraphQL layer
+• Sensitive Data Encryption — Field-level AES-256 encryption for Aadhaar numbers, PAN numbers, and bank account details, never exposed through the GraphQL surface
+• Audit Trail — Every change to any sensitive record logs who changed it, when, from which IP, and what the old and new values were
+• Document Management — Sem-wise marksheet uploads, identity document scans, certificates, photo and signature storage via Cloudinary
+• Academic Qualification Tracking — Structured education history from SSC through PhD with per-semester marksheet uploads and HR verification workflow
+• Multi-Module Architecture — Modular design covering Personal Info, Education, Leave, Payroll, Attendance, Bank Details, and Salary Management
 
 🛠️ Tech Stack
+
 Frontend:
-• React.js with modern hooks
-• Styled Components for styling
-• React Router for navigation
-• Vite for build tooling
+• Next.js 14 with App Router and TypeScript
+• Shadcn/ui component library with Tailwind CSS
+• Apollo Client for GraphQL data fetching
+• React Hook Form + Zod for form validation
+• Axios for sensitive REST API calls
 
 Backend:
-• PHP with RESTful APIs
-• MySQL database
-• JWT authentication
-• Payment gateway integration
+• Node.js with Express and TypeScript
+• Dual-API architecture — Hasura GraphQL for standard operations, Express REST for encrypted/sensitive operations
+• Prisma ORM for schema management and migrations
+• Redis for session caching and lookup tables
+• Nodemailer for transactional emails
+• Multer + Cloudinary for file upload pipeline
 
-📱 Mobile Application
-The platform includes a separately developed native mobile application for iOS and Android, fully integrated with the admin panel and backend systems.
+Database & Infrastructure:
+• PostgreSQL 15 with field-level encryption
+• Hasura GraphQL Engine for auto-generated APIs and permissions
+• Docker Compose for local orchestration of all services
+• JWT + NextAuth.js for authentication and session management
+• bcrypt for password hashing
 
-🎯 Development Highlights
-• Full-stack development from database design to deployment
-• Modern React architecture with context management
-• Secure authentication and payment processing
-• Comprehensive admin management system
-• Mobile app development with native iOS and Android integration
+🔐 Security Highlights
+The system handles highly sensitive government identity data (Aadhaar, PAN) for college staff on an unsecured campus network. All sensitive fields are AES-256 encrypted at the Express layer before reaching the database. Hasura column-level permissions ensure encrypted columns are never queryable via GraphQL regardless of role. Every write to sensitive tables triggers an append-only audit log entry with masked values.
 
-Status: ✅ Complete and Production-Ready
+⚙️ Engineering Highlights
+• Designed an EAV (Entity-Attribute-Value) pattern for the dynamic field system, allowing runtime schema extension without migrations
+• Architected a clean separation between GraphQL (reads + non-sensitive writes) and REST (sensitive writes + file uploads) within the same application
+• Implemented soft-delete across all removable entities — no data is ever permanently deleted, preserving full history
+• Row-level security enforced at the Hasura layer ensures employees can only query their own records regardless of how the frontend constructs queries
+• Append-only service book and audit log tables with no UPDATE or DELETE permissions on any role
 
-This project demonstrates my full-stack development capabilities, modern web technologies expertise, and ability to create scalable, production-ready applications.
-
-Note: Links will be provided once project goes live`,
+Status: 🔄 In Development
+This project demonstrates enterprise-grade full-stack architecture, security-first design for sensitive PII data, and the ability to build complex multi-role systems with dynamic runtime configurability.`,
     image: '/api/placeholder/600/400',
-    technologies: ['React', 'PHP', 'MySQL', 'JavaScript', 'Styled Components', 'Vite'],
-    github: 'https://github.com/pandhijash-21/sunshine',
+    technologies: ['Next.js', 'Node.js', 'Hasura GraphQL', 'PostgreSQL', 'Prisma', 'TypeScript', 'Redis', 'Docker'],
+    github: '#',
     live: '#',
     status: 'ongoing',
-    category: 'E-commerce Platform'
+    category: 'HR Management System'
   },
   {
     title: 'Bolibazaar',
@@ -140,6 +154,120 @@ Status: 🚧 In Development - Links will be provided once project goes live`,
 ];
 
 const completedProjects = [
+  {
+    title: 'Sunshine',
+    description: 'A full-stack e-commerce platform built with modern technologies, featuring both a web application and a separately developed mobile app — now live in production.',
+    detailedDescription: `Sunshine — E-Commerce Platform
+
+Project Overview
+Sunshine is a full-stack e-commerce platform built with modern technologies, featuring a complete web application and a separately developed native mobile app, now live and serving real customers.
+
+🚀 Key Features
+• User Authentication — Secure login/register system with session management
+• Product Catalog — Browse products with categories and search
+• Shopping Cart — Add to cart and checkout functionality
+• Order Management — Complete order processing and tracking system
+• Admin Dashboard — Backend management interface for products and orders
+• Payment Integration — Secure payment processing with gateway integration
+• Mobile App — Native mobile application for iOS and Android
+
+🛠️ Tech Stack
+
+Frontend:
+• React.js with modern hooks
+• Styled Components for styling
+• React Router for navigation
+• Vite for build tooling
+
+Backend:
+• PHP with RESTful APIs
+• MySQL database
+• JWT authentication
+• Payment gateway integration
+
+📱 Mobile Application
+The platform includes a separately developed native mobile application for iOS and Android, fully integrated with the admin panel and backend systems.
+
+🎯 Development Highlights
+• Full-stack development from database design to deployment
+• Modern React architecture with context management
+• Secure authentication and payment processing
+• Comprehensive admin management system
+• Mobile app development with native iOS and Android integration
+
+Status: ✅ Complete and Production-Ready
+The platform is live at sunshinebusiness.in and serving real users.`,
+    image: '/api/placeholder/600/400',
+    technologies: ['React', 'PHP', 'MySQL', 'JavaScript', 'Styled Components', 'Vite'],
+    github: 'https://github.com/pandhijash-21/sunshine',
+    live: 'https://sunshinebusiness.in/',
+    status: 'completed',
+    category: 'E-commerce Platform'
+  },
+  {
+    title: 'Jazba 2k26',
+    description: 'A production-ready, full-stack web application designed to manage end-to-end operations for "Jazba 2026", a university cultural festival.',
+    detailedDescription: `Jazba 2026 — University Cultural Fest Platform
+
+📝 Short Descriptive Summary
+A production-ready, full-stack web application designed to manage end-to-end operations for "Jazba 2026", a university cultural festival. The platform streamlines event browsing, user registrations, and secure online payments while providing administrators with a comprehensive dashboard to manage data and track real-time analytics. It features a modern, animated user interface and a robust microservices architecture, including a custom AI-powered OCR service.
+
+✨ Key Features
+• Seamless Registration & Payment Flow: Integrated with the BillDesk payment gateway to facilitate smooth and secure transaction flows for event registrations, complete with webhook handlers and full audit trails.
+• Modern, Dynamic UI: Built a highly responsive Single Page Application (SPA) using React and Vite, styled with Tailwind CSS, and enriched with GSAP animations for a premium user experience.
+• AI-Powered OCR Microservice: Developed a dedicated, asynchronous Python/FastAPI microservice utilizing PaddleOCR and OpenCV to process image data efficiently via a Redis task queue (RQ).
+• Admin Dashboard & RBAC: Engineered a secure, JWT-authenticated admin portal with Role-Based Access Control (Super Admin, Admin, Viewer) to manage events, participants, and monitor real-time festival analytics.
+• Scalable Backend Architecture: Designed a RESTful API using Node.js, Express, and TypeScript, communicating with a PostgreSQL database managed via Prisma ORM for type-safe, reliable queries.
+• Containerized Deployment: Fully containerized the multi-service stack (Frontend, Backend, OCR API, Worker, DB, Cache) using Docker and Docker Compose for seamless orchestration and deployment behind an Nginx reverse proxy.
+
+🛠️ Technical Stack
+Frontend: React 18, Vite, Tailwind CSS, GSAP, React Router v6, Axios
+Backend: Node.js, Express, TypeScript, Prisma ORM, PostgreSQL, JSON Web Tokens (JWT)
+Payment Gateway: BillDesk API
+OCR / AI Microservice: Python, FastAPI, PaddleOCR, OpenCV, spaCy, Redis, RQ (Redis Queue)
+Infrastructure & DevOps: Docker, Docker Compose, Nginx
+
+Status: ✅ Successfully Deployed for Jazba 2k26`,
+    image: '/api/placeholder/600/400',
+    technologies: ['React', 'Node.js', 'FastAPI', 'PostgreSQL', 'Docker', 'BillDesk'],
+    github: '',
+    live: '',
+    status: 'completed',
+    category: 'Cultural Fest Platform'
+  },
+  {
+    title: 'ICET 2025',
+    description: 'Official website for the International Conference on Emerging Technologies 2025, built to manage registrations, publish schedules, and showcase speakers and research tracks.',
+    detailedDescription: `ICET 2025 — International Conference Website
+
+Project Overview
+The official website for the International Conference on Emerging Technologies (ICET) 2025, developed to serve as the primary platform for conference information, paper submissions, speaker profiles, and participant registrations.
+
+🚀 Key Features
+• Conference Information — Complete details about tracks, topics, and keynotes
+• Speaker Profiles — Dedicated pages for keynote and invited speakers
+• Paper Submission — Guidance and links for research paper submissions
+• Registration System — Online registration for delegates and presenters
+• Schedule & Programme — Detailed day-wise conference programme
+• Responsive Design — Accessible across all device sizes
+
+🛠️ Tech Stack
+• React — Frontend component library for dynamic user interfaces
+• HTML5 / CSS3 — Semantic structure and responsive layouts
+• JavaScript — Interactive UI elements and dynamic content
+• PHP — Server-side form handling and backend logic
+• PHPMailer — Transactional email for registrations and confirmations
+
+Status: ✅ Successfully Deployed for ICET 2025
+
+Note: The conference website has been taken down as the event has concluded.`,
+    image: '/api/placeholder/600/400',
+    technologies: ['React', 'HTML5', 'CSS3', 'JavaScript', 'PHP'],
+    github: '',
+    live: '',
+    status: 'completed',
+    category: 'Conference Website'
+  },
   {
     title: 'ICETAC',
     description: 'A comprehensive web application for the 1st International Conference on Emerging Trends in Artificial Intelligence & Cyber Security, demonstrating expertise in modern web development and backend integration.',
