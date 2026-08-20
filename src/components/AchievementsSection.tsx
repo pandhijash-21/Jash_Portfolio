@@ -2,9 +2,31 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Trophy, Award, Medal, Users, Calendar, Sparkles, X, ImageIcon } from 'lucide-react';
+import { Trophy, Award, Medal, Users, Sparkles, Star, X, ImageIcon } from 'lucide-react';
 
 const achievements = [
+  {
+    id: 'soty-2026',
+    title: 'Nominated for Student of the Year (SOTY) 2026',
+    description: 'Gandhinagar University',
+    role: 'Nominated for Student of the Year (SOTY) 2026 at Gandhinagar University in recognition of academic and extracurricular contribution.',
+    icon: Star,
+    color: 'from-amber-500 to-yellow-500',
+    year: '2026',
+    type: 'Nomination',
+    category: 'Academic Excellence'
+  },
+  {
+    id: 'head-dept-techxtreme-2026',
+    title: 'Head of Department (CE/IT)',
+    description: 'TechXtreme 2026',
+    role: 'Leading the Computer Engineering / Information Technology department for TechXtreme 2026.',
+    icon: Award,
+    color: 'from-cyan-500 to-blue-500',
+    year: '2026',
+    type: 'Department Head',
+    category: 'Leadership'
+  },
   {
     id: 'event-coordinator-techxtreme-2024',
     title: 'Event Coordinator - TechXtreme 2024',
@@ -93,24 +115,25 @@ export default function AchievementsSection() {
   };
 
   return (
-    <section id="achievements" className="py-20 px-6 relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="achievements" className="py-14 px-6 relative">
+      <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.45 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
+          <p className="section-kicker mb-2">{'// 06. recognition'}</p>
+          <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight mb-2">
             Achievements
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Recognitions and accomplishments that showcase leadership, teamwork, and excellence
+          <p className="text-gray-400 max-w-2xl text-sm">
+            Leadership roles, nominations, and campus recognitions.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {achievements.map((achievement, index) => (
             <motion.div
               key={achievement.id}
@@ -118,9 +141,9 @@ export default function AchievementsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10, scale: 1.02 }}
+              whileHover={{ y: -4 }}
               onClick={() => ('hasCertificate' in achievement && achievement.hasCertificate) && handleAchievementClick(achievement)}
-              className={`group bg-gray-900/50 p-6 rounded-2xl border border-gray-700 hover:border-gray-500 transition-all duration-300 relative overflow-hidden ${
+              className={`group tech-panel p-5 pl-6 hover:border-cyan-400/30 transition-colors relative overflow-hidden ${
                 'hasCertificate' in achievement && achievement.hasCertificate ? 'cursor-pointer' : ''
               }`}
             >
@@ -140,7 +163,7 @@ export default function AchievementsSection() {
               </div>
 
               {/* Content */}
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:gradient-text transition-all duration-300">
+              <h3 className="text-lg font-semibold text-white mb-2">
                 {achievement.title}
               </h3>
               
@@ -173,7 +196,7 @@ export default function AchievementsSection() {
                       }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-semibold rounded-full hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-blue-500/50"
+                      className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 text-white text-xs font-medium rounded-md hover:bg-white/10 transition-colors"
                       suppressHydrationWarning
                     >
                       <ImageIcon className="w-4 h-4" />
@@ -254,36 +277,6 @@ export default function AchievementsSection() {
           </motion.div>
         )}
 
-        {/* Summary Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
-        >
-          {[
-            { number: '3+', label: 'Major Events Led', icon: Trophy, color: 'from-yellow-500 to-orange-500' },
-            { number: '2+', label: 'Years Active', icon: Calendar, color: 'from-blue-500 to-cyan-500' },
-            { number: 'Multiple', label: 'State Level Wins', icon: Medal, color: 'from-green-500 to-emerald-500' },
-            { number: '100%', label: 'Team Dedication', icon: Users, color: 'from-purple-500 to-pink-500' },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-800/50 text-center p-6 rounded-xl border border-gray-600 hover:border-gray-500 transition-all duration-300"
-            >
-              <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${stat.color} mb-3`}>
-                <stat.icon className="w-6 h-6 text-white" />
-              </div>
-              <div className="text-3xl font-bold gradient-text mb-2">{stat.number}</div>
-              <div className="text-gray-400 text-sm">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

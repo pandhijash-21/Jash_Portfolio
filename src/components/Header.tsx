@@ -6,11 +6,12 @@ import { Menu, X, Download } from 'lucide-react';
 import ThemeToggleSafe from './ThemeToggleSafe';
 
 const navItems = [
-  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Research', href: '#research' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Tech', href: '#tech-stack' },
   { name: 'Achievements', href: '#achievements' },
-  { name: 'Tech Stack', href: '#tech-stack' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -37,24 +38,25 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-base sm:text-lg md:text-2xl font-bold gradient-text cursor-pointer"
+              className="font-mono text-sm cursor-pointer tracking-tight"
               onClick={() => scrollToSection('#home')}
             >
-              Jash Pandhi
+              <span className="text-cyan-400">jash</span>
+              <span className="text-gray-600">@</span>
+              <span className="text-white">dev</span>
             </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden xl:flex items-center gap-3 text-xs font-mono">
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.02 }}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-gray-300 hover:text-white transition-colors duration-300 font-medium link-hover interactive"
+                  className="text-gray-400 hover:text-white transition-colors font-medium"
                   suppressHydrationWarning
                 >
                   {item.name}
@@ -67,7 +69,7 @@ export default function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.5 }}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-full hover:from-green-600 hover:to-emerald-600 transition-all duration-300 shadow-lg hover:shadow-green-500/50"
+                className="flex items-center gap-2 px-3 py-1.5 bg-cyan-400 text-black text-xs font-medium rounded-md hover:bg-cyan-300 transition-colors font-mono"
               >
                 <Download className="w-4 h-4" />
                 Resume
@@ -76,7 +78,7 @@ export default function Header() {
             </div>
 
             {/* Mobile - Menu Button and Theme Toggle */}
-            <div className="md:hidden flex items-center gap-3">
+            <div className="xl:hidden flex items-center gap-3">
               <ThemeToggleSafe />
               <motion.button
                 whileTap={{ scale: 0.95 }}
@@ -101,7 +103,7 @@ export default function Header() {
               height: isMobileMenuOpen ? 'auto' : 0
             }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
+            className="xl:hidden overflow-hidden"
           >
             <div className="glass-strong rounded-xl mt-4 p-6 space-y-4">
               {navItems.map((item, index) => (
@@ -129,7 +131,7 @@ export default function Header() {
                   x: isMobileMenuOpen ? 0 : -20
                 }}
                 transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
-                className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-full hover:from-green-600 hover:to-emerald-600 transition-all duration-300 justify-center"
+                className="flex items-center gap-2 px-4 py-3 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors justify-center"
               >
                 <Download className="w-4 h-4" />
                 Download Resume

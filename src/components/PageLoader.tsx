@@ -1,37 +1,106 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+
+const TARGET = 'Jash Pandhi';
+const BITS = '01';
+
+function randomBit() {
+  return BITS[Math.floor(Math.random() * BITS.length)];
+}
+
+function scrambleFrom(lockedCount: number) {
+  return TARGET.split('')
+    .map((char, index) => {
+      if (char === ' ') return ' ';
+      if (index < lockedCount) return char;
+      return randomBit();
+    })
+    .join('');
+}
 
 export default function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLightMode, setIsLightMode] = useState(false);
+  const [lockedCount, setLockedCount] = useState(0);
+  const [display, setDisplay] = useState('01010 10101');
+  const [status, setStatus] = useState('decrypting identity');
+  const [rain, setRain] = useState<string[][]>([]);
+
+  const columns = useMemo(
+    () => Array.from({ length: 22 }, (_, i) => ({ id: i, left: (i / 22) * 100 })),
+    []
+  );
 
   useEffect(() => {
-    // Check initial theme
-    setIsLightMode(document.documentElement.classList.contains('light'));
-    
-    // Listen for theme changes
-    const observer = new MutationObserver(() => {
+    const checkTheme = () => {
       setIsLightMode(document.documentElement.classList.contains('light'));
+    };
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
     });
-    
-    observer.observe(document.documentElement, { 
-      attributes: true, 
-      attributeFilter: ['class'] 
-    });
-    
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    // Simulate loading time (minimum 2 seconds for smooth experience)
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
+    setRain(columns.map(() => Array.from({ length: 16 }, () => randomBit())));
 
-    return () => clearTimeout(timer);
+    const rainTimer = window.setInterval(() => {
+      setRain((prev) =>
+        prev.map((col) => {
+          const next = [...col];
+          next.pop();
+          next.unshift(randomBit());
+          return next;
+        })
+      );
+    }, 90);
+
+    return () => window.clearInterval(rainTimer);
+  }, [columns]);
+
+  useEffect(() => {
+    const scrambleTimer = window.setInterval(() => {
+      setDisplay(scrambleFrom(lockedCount));
+    }, 42);
+
+    return () => window.clearInterval(scrambleTimer);
+  }, [lockedCount]);
+
+  useEffect(() => {
+    const startDelay = 280;
+    const step = 110;
+    const timers: number[] = [];
+
+    TARGET.split('').forEach((_, index) => {
+      timers.push(
+        window.setTimeout(() => {
+          setLockedCount(index + 1);
+        }, startDelay + index * step)
+      );
+    });
+
+    const decodedAt = startDelay + TARGET.length * step;
+    timers.push(
+      window.setTimeout(() => {
+        setDisplay(TARGET);
+        setStatus('access granted');
+      }, decodedAt + 80)
+    );
+    timers.push(
+      window.setTimeout(() => {
+        setIsLoading(false);
+      }, decodedAt + 900)
+    );
+
+    return () => timers.forEach((id) => window.clearTimeout(id));
   }, []);
+
+  const decoded = lockedCount >= TARGET.length;
 
   return (
     <AnimatePresence>
@@ -39,131 +108,54 @@ export default function PageLoader() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className={`fixed inset-0 z-[9999] flex items-center justify-center ${
-            isLightMode ? 'bg-white' : 'bg-black'
+          transition={{ duration: 0.55, ease: 'easeInOut' }}
+          className={`fixed inset-0 z-[9999] overflow-hidden ${
+            isLightMode ? 'bg-[#eef1f4] text-[#0f766e]' : 'bg-[#07090d] text-cyan-400'
           }`}
         >
-          {/* Animated background */}
-          <div className={`absolute inset-0 ${
-            isLightMode 
-              ? 'bg-gradient-to-br from-blue-100/30 via-purple-100/30 to-blue-100/30' 
-              : 'bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-blue-900/20'
-          }`} />
-          
-          {/* Main loader content */}
-          <div className="relative z-10 text-center">
-            {/* Logo/Name */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-8"
-            >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold">
-                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-[length:200%_100%] bg-[position:0%_50%] bg-clip-text text-transparent">
-                  Jash Pandhi
-                </span>
-              </h1>
-            </motion.div>
-
-            {/* Loading animation */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mb-6"
-            >
-              {/* Animated dots */}
-              <div className="flex justify-center space-x-2">
-                {[0, 1, 2].map((index) => (
-                  <motion.div
-                    key={index}
-                    className="w-3 h-3 bg-blue-400 rounded-full"
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.5, 1, 0.5],
-                    }}
-                    transition={{
-                      duration: 1.2,
-                      repeat: Infinity,
-                      delay: index * 0.2,
-                      ease: "easeInOut"
-                    }}
-                  />
+          <div className="absolute inset-0 pointer-events-none opacity-25">
+            {columns.map((col, colIndex) => (
+              <div
+                key={col.id}
+                className="absolute top-0 font-mono text-[10px] leading-4 tracking-widest"
+                style={{ left: `${col.left}%` }}
+              >
+                {(rain[colIndex] || []).map((bit, rowIndex) => (
+                  <div key={`${col.id}-${rowIndex}`} className="opacity-80">
+                    {bit}
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            ))}
+          </div>
 
-            {/* Loading text */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className={`text-sm sm:text-base ${
-                isLightMode ? 'text-gray-600' : 'text-gray-400'
-              }`}
-            >
-              <motion.span
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                Loading...
-              </motion.span>
-            </motion.div>
+          <div className="relative z-10 h-full flex flex-col items-center justify-center px-6">
+            <p className="font-mono text-[11px] tracking-[0.22em] uppercase mb-6 opacity-70">
+              {'> '}
+              {status}
+              <span className="animate-pulse">_</span>
+            </p>
 
-            {/* Progress bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="mt-6 w-64 mx-auto"
-            >
-              <div className={`h-1 rounded-full overflow-hidden ${
-                isLightMode ? 'bg-gray-200' : 'bg-gray-800'
-              }`}>
-                <motion.div
-                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 2, ease: "easeInOut" }}
-                />
-              </div>
-            </motion.div>
+            <h1 className="font-mono text-3xl sm:text-5xl md:text-6xl font-semibold tracking-[0.12em] text-center">
+              {display.split('').map((char, index) => (
+                <span
+                  key={`${index}-${char}`}
+                  className={
+                    index < lockedCount || decoded
+                      ? isLightMode
+                        ? 'text-[#111827]'
+                        : 'text-white'
+                      : ''
+                  }
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
+            </h1>
 
-            {/* Floating particles */}
-            <div className="absolute inset-0 pointer-events-none">
-              {[...Array(20)].map((_, i) => {
-                // Use deterministic positioning based on index to avoid hydration mismatch
-                const left = (i * 5.2 + 10) % 100;
-                const top = (i * 3.7 + 15) % 100;
-                const delay = (i * 0.1) % 2;
-                
-                return (
-                  <motion.div
-                    key={i}
-                    className={`absolute w-1 h-1 rounded-full ${
-                      isLightMode ? 'bg-blue-500/20' : 'bg-blue-400/30'
-                    }`}
-                    style={{
-                      left: `${left}%`,
-                      top: `${top}%`,
-                    }}
-                    animate={{
-                      y: [0, -20, 0],
-                      opacity: [0, 1, 0],
-                      scale: [0, 1, 0],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      delay: delay,
-                      ease: "easeInOut"
-                    }}
-                  />
-                );
-              })}
-            </div>
+            <p className="font-mono text-xs mt-8 opacity-50 tracking-widest">
+              {decoded ? '01001010 01010000' : '01001010 01100001 01110011 01101000'}
+            </p>
           </div>
         </motion.div>
       )}

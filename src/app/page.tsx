@@ -1,7 +1,8 @@
 import Header from '@/components/Header';
-import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
+import ExperienceSection from '@/components/ExperienceSection';
+import ResearchSection from '@/components/ResearchSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import TechStackSection from '@/components/TechStackSection';
 import AchievementsSection from '@/components/AchievementsSection';
@@ -18,6 +19,8 @@ export default function Home() {
         <HeroSection />
       </div>
       <AboutSection />
+      <ExperienceSection />
+      <ResearchSection />
       <ProjectsSection />
       <TechStackSection />
       <AchievementsSection />

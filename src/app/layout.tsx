@@ -18,17 +18,16 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Jash Pandhi - Full Stack Developer",
-  description: "Professional full-stack developer from Ahmedabad, Gujarat. Specializing in modern web technologies and crafting digital experiences that bridge the gap between imagination and reality.",
+    description: "Full-stack developer from Ahmedabad building production web and mobile applications with React, Node.js, Flutter, and SQL.",
   keywords: ["Jash Pandhi", "full stack developer", "web development", "react", "node.js", "typescript", "portfolio", "Ahmedabad", "Gujarat"],
   authors: [{ name: "Jash Pandhi" }],
   creator: "Jash Pandhi",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon', type: 'image/png' },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: '/apple-icon',
   },
   openGraph: {
     type: "website",
